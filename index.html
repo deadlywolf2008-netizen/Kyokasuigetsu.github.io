@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Secret Compatibility Test</title>
+
+<!-- Fireworks Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: white;
+  padding-top: 60px;
+  overflow: hidden;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 Secret Compatibility Test 🔥</h1>
+
+<input type="text" id="name1" placeholder="Enter First Name"><br>
+<input type="text" id="name2" placeholder="Enter Second Name"><br>
+
+<button onclick="startPrank()">Check Now</button>
+
+<div id="result"></div>
+
+<script>
+function startPrank() {
+  var name1 = document.getElementById("name1").value;
+  var name2 = document.getElementById("name2").value;
+
+  if(name1 === "" || name2 === "") {
+    document.getElementById("result").innerHTML = "Enter both names first!";
+    return;
+  }
+
+  document.getElementById("result").innerHTML = "⏳ Calculating compatibility...";
+
+  setTimeout(function() {
+
+    document.getElementById("result").innerHTML =
+      "😂 " + name1 + " and " + name2 + " have been PRANKED! 😂<br><br>" +
+      "There was never any compatibility test!";
+
+    launchFireworks();
+
+  }, 3000);
+}
+
+function launchFireworks() {
+  var duration = 3 * 1000;
+  var end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 5,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 5,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+}
+</script>
+
+</body>
+</html>
